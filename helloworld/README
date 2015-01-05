@@ -1,0 +1,28 @@
+[Setup]
+1. Install kernel development packages
+   You must conform kernel's version to kernel-devel's version.
+	$ rpm -qa | grep -ie kernel-headers -ie kernel-devel
+	kernel-devel-3.9.10-100.fc17.x86_64
+	kernel-headers-3.6.9-2.fc17.x86_64
+
+[Compile]
+Enter this directory.
+1. $ gmake
+2. youcan see hello.ko in your directory
+3. $ sudo insmod hello.ko
+
+[Install Check]
+1. type lsmod
+ $ lsmod | grep -i hello
+ hello                  12496  0 
+2. sudo cat /var/log/messages | tail -2
+Jan  5 20:49:40 localhost kernel: [  304.946853] driver loaded
+Jan  5 20:49:40 localhost kernel: [  304.946855] Hello World
+3. you can see install log
+
+[Clean]
+1. $ gmake clean
+
+[URL]
+	http://www.linux-dvr.biz/archives/category/%E3%83%87%E3%83%90%E3%82%A4%E3%82%B9%E3%83%89%E3%83%A9%E3%82%A4%E3%83%90%E9%96%8B%E7%99%BA%E5%85%A5%E9%96%80
+
