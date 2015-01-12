@@ -1,0 +1,21 @@
+[Compile]
+Enter this directory.
+1. $ gmake
+2. you can see <modname>.ko in your directory
+3. $ sudo insmod <modname>.ko
+4. $ lsmod | grep <modname>
+
+[Check]
+$ cat /proc/devices
+(mycharがキャラクタデバイスに登録されていることを確認する)
+$ dmesg
+[15516.786145] simple_char: simple_char_init
+[15516.786145]   simple_char_bufsize = 10
+
+[Clean]
+1. $ gmake clean
+
+[URL]
+	http://d.hatena.ne.jp/mmitou/20120707/1341681213
+		"メジャー番号とマイナー番号の登録"を参考
+

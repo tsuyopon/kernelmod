@@ -1,0 +1,29 @@
+[Compile]
+Enter this directory.
+1. $ gmake
+2. you can see <modname>.ko in your directory
+3. $ sudo insmod <modname>.ko
+4. $ lsmod | grep <modname>
+
+[Check]
+インターフェイスファイルが存在することを確認する
+$ ls -al /proc/driver/procfs 
+-rw-rw-rw- 1 root root 0 Jan 12 21:58 /proc/driver/procfs
+$ cat /proc/driver/procfs 
+$ 
+
+procファイルに何か値を設定して、読み込んでみる
+$ echo abcdef > /proc/driver/procfs 
+$ cat /proc/driver/procfs 
+abcdef
+
+7文字+改行により8文字と判定されるので書き込みできなくなる
+$ echo abcdefg > /proc/driver/procfs 
+-bash: echo: write error: No space left on device
+
+[Clean]
+1. $ gmake clean
+
+[URL]
+	http://www.hakodate-ct.ac.jp/~tokai/tokai/research/kmod.html
+

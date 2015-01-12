@@ -1,0 +1,27 @@
+パラメータを渡すことができるカーネルモジュール
+
+[Compile]
+Enter this directory.
+1. $ gmake
+2. you can see <modname>.ko in your directory
+3. $ sudo insmod <modname>.ko
+4. $ lsmod | grep <modname>
+
+[Install Check]
+$ ls /sys/module/getparams/parameters/teststr 
+/sys/module/getparams/parameters/teststr
+$ cat /sys/module/getparams/parameters/teststr 
+abcdefghijklmn
+$ sudo rmmod getparams
+
+set teststr parameter
+$ sudo insmod getparams.ko teststr="azarashi"
+$ cat /sys/module/getparams/parameters/teststr
+azarashi
+
+[Clean]
+1. $ gmake clean
+
+[URL]
+	http://www.hakodate-ct.ac.jp/~tokai/tokai/research/kmod.html
+

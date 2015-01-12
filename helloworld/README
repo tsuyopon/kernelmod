@@ -1,3 +1,5 @@
+カーネルモジュール最初のプログラム
+
 [Setup]
 1. Install kernel development packages
    You must conform kernel's version to kernel-devel's version.

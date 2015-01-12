@@ -1,0 +1,111 @@
+[Compile]
+Enter this directory.
+1. $ gmake
+2. you can see <modname>.ko in your directory
+3. $ sudo insmod <modname>.ko
+4. $ lsmod | grep <modname>
+
+[Check]
+
+以下の例では、メジャー番号250番がキャラクタデバイス番号であることがわかる
+$ cat /proc/devices 
+Character devices:
+  1 mem
+  4 /dev/vc/0
+  4 tty
+  4 ttyS
+  5 /dev/tty
+  5 /dev/console
+  5 /dev/ptmx
+  7 vcs
+ 10 misc
+ 13 input
+ 14 sound
+ 21 sg
+ 29 fb
+ 99 ppdev
+116 alsa
+128 ptm
+136 pts
+162 raw
+180 usb
+188 ttyUSB
+189 usb_device
+202 cpu/msr
+203 cpu/cpuid
+250 simple_char
+251 hidraw
+252 usbmon
+253 bsg
+254 rtc
+
+Block devices:
+259 blkext
+  7 loop
+  8 sd
+  9 md
+ 11 sr
+ 65 sd
+ 66 sd
+ 67 sd
+ 68 sd
+ 69 sd
+ 70 sd
+ 71 sd
+128 sd
+129 sd
+130 sd
+131 sd
+132 sd
+133 sd
+134 sd
+135 sd
+253 device-mapper
+254 mdp
+
+キャラクタデバイスファイルを作成します。先ほどのメジャー番号は250で作成します。マイナー番号はここでは0とします
+$ sudo mknod /dev/simpledriver0 c 250 0
+$ sudo chmod 666 /dev/simpledriver0 
+
+作成したキャラクタデバイスに値を入れてみます。
+$ echo "aaa" > /dev/simpledriver0 
+$ sudo tail -3 /var/log/messages
+Jan 12 22:36:44 localhost kernel: [16837.133505]   &inode->i_cdev = ffff88001d78e4d8
+Jan 12 22:36:44 localhost kernel: [16837.133508]   dev = ffff88001a05a800
+Jan 12 22:36:44 localhost kernel: [16837.133511]   &simple_char_devs[0] = ffff88001a05a800
+$ cat /proc/simple_char 
+0: aaa
+tsuyosoc 
+1:  
+2:  
+3:  
+
+$ echo "bbb" > /dev/simpledriver0 
+$ cat /proc/simple_char 
+0: bbb
+tsuyosoc 
+1:  
+2:  
+3:  
+
+続いて、マイナー番号が0-3までの値であれば/procが認識しますので、次は1番で作成します
+$ sudo mknod /dev/simpledriver1 c 250 1
+$ sudo chmod 666 /dev/simpledriver1
+$ echo "ccc" > /dev/simpledriver1
+
+確認してみると次は1番に値が入っていることがわかります
+$ cat /proc/simple_char 
+0: bbb
+tsuyosoc 
+1: ccc
+tsuyosf.tmp 
+2:  
+3:  
+
+
+[Clean]
+1. $ gmake clean
+
+[URL]
+	http://d.hatena.ne.jp/mmitou/20120707/1341681213
+
