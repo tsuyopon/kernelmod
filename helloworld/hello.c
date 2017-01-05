@@ -15,6 +15,16 @@ static int hello_init(void)
 {
 	printk(KERN_ALERT "driver loaded\n");
 	printk(KERN_ALERT "Hello World\n");
+
+	// ログレベル別出力
+	printk(KERN_EMERG   "Emergency level8\n");
+	printk(KERN_ALERT   "ALERT level7\n");
+	printk(KERN_CRIT    "CRIT level6\n");
+	printk(KERN_ERR     "ERR level5\n");
+	printk(KERN_WARNING "WARNING level4\n");
+	printk(KERN_NOTICE  "NOTICE level3\n");
+	printk(KERN_INFO    "INFO level2\n");
+	printk(KERN_DEBUG   "DEBUG level1\n");
 	return 0;
 }
 
