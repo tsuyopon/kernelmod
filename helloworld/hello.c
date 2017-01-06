@@ -34,5 +34,5 @@ static void hello_exit(void)
 }
 
 // Register modules
-module_init(hello_init);
-module_exit(hello_exit);
+module_init(hello_init);  // called when insmod executed
+module_exit(hello_exit);  // called when rmmod executed
