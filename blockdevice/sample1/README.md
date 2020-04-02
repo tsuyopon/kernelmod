@@ -1,6 +1,10 @@
 # 概要
 シンプルなブロックデバイスドライバについて
 
+ブロックデバイスとはハードディスクのようにブロック(セクタ)単位でデータの入出力を取扱い、かつキューによるバッファ処理を行うデバイスです。
+
+このサンプルではRAMディスクドライバを使ったサンプルでハードを利用しないブロックデバイスドライバのサンプルとして扱っています。
+
 # 使い方
 
 ビルドとモジュールのインストール
@@ -65,3 +69,7 @@ $ sudo rmmod simpleblock
 - A Simple Block Driver for Linux Kernel 2.6.31
   - https://blog.superpat.com/2010/05/04/a-simple-block-driver-for-linux-kernel-2-6-31/
 - https://wiki.bit-hive.com/north/pg/%E3%82%B7%E3%83%B3%E3%83%97%E3%83%AB%E3%83%96%E3%83%AD%E3%83%83%E3%82%AF%E3%83%87%E3%83%90%E3%82%A4%E3%82%B9%E3%83%89%E3%83%A9%E3%82%A4%E3%83%90
+
+# 関連参考
+- 基本的には以下のサイトに記載されているブロックデバイスと同じ作りです。
+  - https://www.hakodate-ct.ac.jp/~tokai/tokai/research/kmod.html

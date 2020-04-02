@@ -127,7 +127,7 @@ int sbd_getgeo(struct block_device * block_device, struct hd_geometry * geo) {
 
 	/* We have no real geometry, of course, so make something up. */
 	/*
-	 * このようなハード構造を持たないデバイスにも、シリンダ/ヘッド/セクタを割り当てる必要があります。
+	 * このようなハード構造を持たないデバイスにも(今回の例はRAMブロックデバイスなのでハードは不要)、シリンダ/ヘッド/セクタを割り当てる必要があります。
 	 * 要はシリンダ×ヘッド×セクタが全セクタ数になればいいわけで、(size & ~0x3f) >> 6で、上位6ビットをシリンダ数、ヘッドを４、セクタを16とします。
 	 * ４×１６=2^6ですから、size & ~0x3fが全セクタ数となるわけです。なお、この実装ではsize & 0x3fのセクタ数は無視されることになります。
  	 */
@@ -153,6 +153,8 @@ static int __init sbd_init(void) {
 	 */
 	Device.size = nsectors * logical_block_size;
 	spin_lock_init(&Device.lock);
+
+	// RAMバッファとして確保
 	Device.data = vmalloc(Device.size);
 	if (Device.data == NULL)
 		return -ENOMEM;
@@ -196,7 +198,7 @@ static int __init sbd_init(void) {
 	//   デバイスのrequest_queにリストされているrequestにリストされます。
 	Device.gd->queue = Queue;
 
-	// 仮想ディスクを登録する
+	// 仮想ディスク /dev/sdb0 はこの関数によって生成される
 	add_disk(Device.gd);
 
 	return 0;
